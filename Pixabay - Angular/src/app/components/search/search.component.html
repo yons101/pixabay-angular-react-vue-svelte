@@ -1,0 +1,9 @@
+<div class="my-5 input-group">
+  <input class="form-control" type="text" placeholder="Search for images" [(ngModel)]="searchTerm"
+    (keyup.enter)="onSearch(searchTerm)" />
+  <div class="input-group-append">
+    <button class="btn btn-primary px-5" type="button" (click)="onSearch(searchTerm)">
+      Go!
+    </button>
+  </div>
+</div>
