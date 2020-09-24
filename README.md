@@ -4,6 +4,8 @@ Angular ≈ 86 kb
 
 React ≈ 49 kb
 
-Vue ≈ 46 kb
+Vue ≈ 52 kb
 
 Svelte ≈ 8 kb
+
+Live DEMO: https://pixabay101.netlify.app/
