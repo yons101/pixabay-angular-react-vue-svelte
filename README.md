@@ -1,9 +1,9 @@
-Production bundle size
+Production bundle size gzipped
 
-Angular = 309 kb
+Angular ≈ 86 kb
 
-React = 133 kb
+React ≈ 49 kb
 
-Vue = 124 kb
+Vue ≈ 46 kb
 
-Svelte = 8 kb
+Svelte ≈ 8 kb
