@@ -1,37 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Search from "../components/Search";
 import ImageCard from "../components/ImageCard";
+import { Context } from "../context";
 
 function Home() {
-    const [images, setImages] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("Nature");
+    const { state, fetchImages } = useContext(Context);
 
     useEffect(() => {
-        fetch(
-            `https://pixabay.com/api/?key=17039239-7ccdc3f5c80caa80d628661b2&q=${searchTerm}&image_type=photo`
-        )
-            .then((res) => res.json())
-            .then((data) => {
-                setImages(data.hits);
-                setLoading(false);
-            });
-    }, [searchTerm]);
+        fetchImages(searchTerm);
+    }, [searchTerm]); // eslint-disable-line
 
     return (
-        <div>
+        <main class="container">
             <Search search={(value) => setSearchTerm(value)} />
-
-            {!loading && (
-                <div className="container">
-                    <div className="row  justify-content-center">
-                        {images.map((image, i) => (
-                            <ImageCard image={image} key={i} />
-                        ))}
+            <div className="row justify-content-center">
+                {state.loading ? (
+                    <div className="spinner-border text-dark" role="status">
+                        <span className="sr-only">Loading...</span>
                     </div>
-                </div>
-            )}
-        </div>
+                ) : (
+                    <div className="container">
+                        <div className="row  justify-content-center">
+                            {state.images.map((image, i) => (
+                                <ImageCard image={image} key={i} />
+                            ))}
+                        </div>
+                    </div>
+                )}
+                {state.images.length === 0 && <p>No images</p>}
+            </div>
+        </main>
     );
 }
 

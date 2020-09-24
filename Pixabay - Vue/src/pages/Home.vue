@@ -20,6 +20,7 @@
 <script>
 import Search from "../components/Search.vue";
 import ImageCard from "../components/ImageCard.vue";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Home",
@@ -27,25 +28,12 @@ export default {
     Search,
     ImageCard,
   },
-  data() {
-    return {
-      images: [],
-      loading: true,
-    };
-  },
+
   methods: {
-    async fetchImages(searchTerm = "nature") {
-      await fetch(
-        `https://pixabay.com/api/?key=17039239-7ccdc3f5c80caa80d628661b2&q=${searchTerm}&image_type=photo&pretty=true`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          this.images = data.hits;
-          this.loading = false;
-        })
-        .catch((err) => console.log(err));
-    },
+    ...mapActions(["fetchImages"]),
   },
+  computed: mapGetters(["images", "loading"]),
+
   created() {
     this.fetchImages("business");
   },

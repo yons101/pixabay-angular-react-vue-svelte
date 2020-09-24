@@ -2,9 +2,8 @@
     import { onMount } from "svelte";
     import Search from "../components/Search.svelte";
     import ImageCard from "../components/ImageCard.svelte";
+    import { state } from "../store.js";
 
-    let images = [];
-    let loading = true;
     const PIXABAY_KEY = process.env.PIXABAY_KEY;
 
     const fetchImages = async (searchTerm = "nature") => {
@@ -13,12 +12,14 @@
         )
             .then((res) => res.json())
             .then((data) => {
-                images = data.hits;
-                loading = false;
+                $state.images = data.hits;
+                $state.loading = false;
             })
             .catch((err) => console.log(err));
     };
-    onMount(async () => fetchImages());
+    onMount(async () => {
+        fetchImages();
+    });
 
     const search = (e) => {
         fetchImages(e.detail);
@@ -29,14 +30,14 @@
     <Search on:search={search} />
 
     <div class="row justify-content-center">
-        {#if loading}
+        {#if $state.loading}
             <div class="spinner-border text-dark" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
-        {:else if images.length === 0}
+        {:else if $state.images.length === 0}
             <p>No images</p>
         {:else}
-            {#each images as image}
+            {#each $state.images as image}
                 <ImageCard {image} />
             {/each}
         {/if}
