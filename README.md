@@ -1,4 +1,4 @@
-Production bundle size gzipped
+Production bundle size compressed with Brotli
 
 Angular ≈ 86 kb
 
