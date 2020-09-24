@@ -1,14 +1,19 @@
 <template>
   <nav class="navbar navbar-expand-lg shadow-sm">
     <div class="container">
-      <a class="navbar-brand logo text-white" href="/">Pixabay - Vue</a>
+      <router-link to="/" class="navbar-brand logo text-white"
+        >Pixabay - Vue</router-link
+      >
+      <router-link to="/about/" class="navbar-brand logo text-white"
+        >About</router-link
+      >
     </div>
   </nav>
 </template>
 
 <script>
 export default {
-  name: "Navbar"
+  name: "Navbar",
 };
 </script>
 

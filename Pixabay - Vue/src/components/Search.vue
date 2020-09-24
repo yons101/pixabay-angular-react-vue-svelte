@@ -22,15 +22,14 @@ export default {
   name: "Search",
   data() {
     return {
-      searchTerm: ""
+      searchTerm: "",
     };
   },
   methods: {
-    ...mapActions(["fetchImages"]),
     search() {
-      this.fetchImages(this.searchTerm);
-    }
-  }
+      this.$emit("fetchImages", this.searchTerm);
+    },
+  },
 };
 </script>
 
